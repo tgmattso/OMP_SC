@@ -10,7 +10,7 @@ void mm_gpu(int Ndim, int Mdim, int Pdim, TYPE *A, TYPE *B, TYPE *C){
   int i, j, k;
 
 #pragma omp target map(tofrom:C[0:Ndim*Mdim]) map(to:B[0:Pdim*Mdim],A[0:Ndim*Pdim])
-#pragma omp loop collapse(2)
+#pragma omp teams loop collapse(2)
   for (i=0; i<Ndim; i++){
      for (j=0; j<Mdim; j++){
 	for(k=0;k<Pdim;k++){

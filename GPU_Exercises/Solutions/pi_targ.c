@@ -27,7 +27,7 @@ int main() {
   start_time = omp_get_wtime();
 
 #pragma omp target map(sum)
-#pragma omp loop private(x) reduction(+:sum)
+#pragma omp teams loop private(x) reduction(+:sum)
   for (i = 1; i <= num_steps; i++) {
     x = (i - 0.5) * step;
     sum = sum + 4.0 / (1.0 + x * x);

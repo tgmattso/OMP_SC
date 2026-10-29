@@ -25,7 +25,7 @@ int main()
 
    // add two vectors
 #pragma target 
-#pragma loop
+#pragma teams loop
    for (int i=0; i<N; i++){
       c[i] = a[i] + b[i];
    }
