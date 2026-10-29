@@ -1,15 +1,44 @@
+#
+#  Make changes here for the particular GPU platform you are using.
+#  All the makefiles in this directory tree will use this file so
+#  if you set things up correctly, the make command will work 
+#  everywhere.
+#
+
+#------------------------------------
+# for the AMD clang compilers 
+#
+# We assume you have loaded the modules required by the 
+# AMD compilers prior to running make
+#
+#   module load rocm amdclang
+#
+# Check the arch to use by checking the output from the command
+# (after loading modules)
+#
+#   rocmifo | grep gfx
+#
+#------------------------------------
+CC          = amdclang++
+CLINKER     = $(CC) 
+OPTFLAGS   = -O3 -fopenmp --offload-arch-gfx942
+
+#------------------------------------
 # for the Nvidia compiler (PGI)
-# copy to make.def
-CC          = nvc
+#------------------------------------
+#CC          = nvc
 #CC          = icx 
-CLINKER     = $(CC) -lm
-OPTFLAGS   = -O3 -mp=gpu 
+#CLINKER     = $(CC) 
+#OPTFLAGS   = -O3 -mp=gpu 
 #OPTFLAGS   = -O3 -mp=gpu -gpu=cc75
 #OPTFLAGS    = -O3 -qnextgen -fiopenmp -fopenmp-targets=spir64
 #OPTFLAGS    = -O3 -fopenmp -fopenmp-targets=nvptx64 --cuda-path=/cm/shared/apps/cuda10.2/toolkit/10.2.89 -Xopenmp-target -march=sm_70
-LIBS        =
-PRE         = ./
 
+#------------------------------------
+# for all platforms
+#------------------------------------
+LIBS        = -lm
+PRE         = ./
 CFLAGS    = $(OPTFLAGS)
 
 OBJ=o
