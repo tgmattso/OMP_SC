@@ -13,15 +13,15 @@
 #
 #   module load rocm amdclang
 #
-# Check the arch to use by checking the output from the command
+# Verify the offload arch to use from the output of the command
 # (after loading modules)
 #
 #   rocmifo | grep gfx
 #
 #------------------------------------
-CC          = amdclang++
+CC          = amdclang
 CLINKER     = $(CC) 
-OPTFLAGS   = -O3 -fopenmp --offload-arch-gfx942
+OPTFLAGS   = -O3 -fopenmp --offload-arch=gfx942
 
 #------------------------------------
 # for the Nvidia compiler (PGI)

@@ -75,7 +75,7 @@ mm_testbed$(EXE): $(MM_OBJS) mm_utils.h
 
 test: $(EXES)
 	for i in $(EXES); do \
-            $(PRE)$$i; \
+            OMP_TARGET_OFFLOAD=MANDATORY $(PRE)$$i; \
         done
 
 clean:

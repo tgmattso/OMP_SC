@@ -99,7 +99,7 @@ int main(int argc, char **argv) {
 
 #pragma omp target map(tofrom : xnew[0 : Ndim], xold[0 : Ndim])                \
                            map(to : A[0 : Ndim *Ndim], b[0 : Ndim])
-#pragma omp loop
+#pragma omp teams loop
 //#pragma omp teams distribute parallel for simd 
     for (int i = 0; i < Ndim; i++) {
       xnew[i] = (TYPE)0.0;
@@ -114,7 +114,7 @@ int main(int argc, char **argv) {
     //
     conv = 0.0;
 #pragma omp target map(to : xnew[0 : Ndim], xold[0 : Ndim]) map(tofrom : conv)
-#pragma omp loop reduction(+ : conv)
+#pragma omp teams loop reduction(+ : conv)
 //#pragma omp teams distribute parallel for simd reduction(+ : conv)
     for (int i = 0; i < Ndim; i++) {
       TYPE tmp = xnew[i] - xold[i];

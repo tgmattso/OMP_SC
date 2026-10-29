@@ -103,7 +103,7 @@ int main(int argc, char **argv) {
     iters++;
 
 #pragma omp target
-#pragma omp loop
+#pragma omp teams loop
 //#pragma omp teams distribute parallel for simd 
     for (int i = 0; i < Ndim; i++) {
       xnew[i] = (TYPE)0.0;
@@ -121,7 +121,7 @@ int main(int argc, char **argv) {
 //#pragma omp target map(tofrom : conv)
 //#pragma omp teams distribute parallel for simd reduction(+ : conv)
 #pragma omp target 
-#pragma omp loop reduction(+ : conv)
+#pragma omp teams loop reduction(+ : conv)
     for (int i = 0; i < Ndim; i++) {
       TYPE tmp = xnew[i] - xold[i];
       conv += tmp * tmp;
