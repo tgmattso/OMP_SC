@@ -7,6 +7,10 @@
 **            unified shared memory through setting the 
 **            HSA_XNACK environment variable to 1. 
 **
+**            I still use the function name mm_gpu() so to use
+**            this version of the function, replace mm_gpu.o with
+**            mm_gpu_xnack.o in the makefile object file list.
+**
 **  HISTORY: Written by Tim Mattson, November 2026.
 */
 #include "mm_utils.h"
